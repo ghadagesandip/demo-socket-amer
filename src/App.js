@@ -1,11 +1,13 @@
 import socketIOClient from "socket.io-client";
 import React, { Component } from 'react';
+import { SERVER_ADDRESS } from './constants'
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       response: true,
-      endpoint: "http://127.0.0.1:3005?token='testtoken'"
+      endpoint: `${SERVER_ADDRESS}?token='testtoken'`
     };
   }
 
