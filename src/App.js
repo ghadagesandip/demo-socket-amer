@@ -1,10 +1,8 @@
 import socketIOClient from "socket.io-client";
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-
 import { SERVER_ADDRESS } from './constants'
 import AppHeader from './Components/AppHeader';
-import Login from './Containers/Login';
+import { Routes } from './Routes';
 
 class App extends Component {
   
@@ -14,9 +12,7 @@ class App extends Component {
       <React.Fragment>
             <AppHeader />
             <div className="container-fluid content">
-                <Switch>
-                  <Route exact path="/" component ={Login} />
-                </Switch>
+              <Routes />
             </div>
       </React.Fragment>
     );
