@@ -1,6 +1,6 @@
 import apiFactory from './api';
 
-export const login = (data) => {
+export const getContacts = (userId) => {
     // if(data.userName=="Sandipghadge" && data.password =="Sandipghadge123"){
     //     return Promise.resolve({
     //         data: {
@@ -15,5 +15,5 @@ export const login = (data) => {
     // } else{
     //     return Promise.reject(new Error('Error occurred.'))
     // }
-    return apiFactory().post('/login', data);
+    return apiFactory().get(`/contact/getContacts/${userId}`);
 }

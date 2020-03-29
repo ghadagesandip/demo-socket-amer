@@ -6,18 +6,20 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT ="LOGOUT";
 
 export function login(loginData) {
+    
     return dispatch => { 
         
         dispatch(loginRequestStarted(true));
 
         AuthService.login(loginData).then(
-            res => dispatch(loginSuccess(res.data.data[0])),
+            res => {
+                dispatch(loginSuccess(res.data.data[0]));
+            },
             err => {
                 dispatch(loginFailed(err))
             }
         )
     }
-
 }
 
 export function loginRequestStarted(bool){
@@ -36,9 +38,11 @@ export function loginSuccess(userInfo) {
 		type: LOGIN_SUCCESS,
 		payload:{
 			userInfo,
-            loggingIn: false
+            loggingIn: false,
+            isLoggedIn: true
 		}
-	}
+    }
+    
 }
 
 export function loginFailed(error) {
@@ -49,7 +53,9 @@ export function loginFailed(error) {
             loggedIn:false, 
             errorMessage: error+'',
             userInfo: {},
-            loggingIn: false
+            loggingIn: false,
+            isLoggedIn: false
+
 		}
 	}
 }

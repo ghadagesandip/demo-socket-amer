@@ -1,15 +1,13 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, logout } from './../Actions/auth.actions';
-import { Link } from 'react-router-dom';
+
+import { login } from '../Actions/auth.actions';
 
 class Login extends Component{ 
 
     constructor(props) {
         super(props);
-        this.props.logout();
-
         this.state = {
             username: '',
             password: '',
@@ -25,6 +23,14 @@ class Login extends Component{
     }
 
 
+    static getDerivedStateFromProps(props, state) {
+     const { history } = props;
+      if(props.isLoggedIn) {
+        history.push('/')
+      }
+      return null;
+    }
+
     handleSubmit(e) {
         e.preventDefault();
 
@@ -38,7 +44,6 @@ class Login extends Component{
     
     render() {
         const { loggingIn } = this.props;
-        console.log('loggingIn' ,loggingIn)
         const { username, password, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
@@ -64,7 +69,6 @@ class Login extends Component{
                         {loggingIn &&
                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                         }
-                        <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
                 </form>
             </div>
@@ -72,12 +76,12 @@ class Login extends Component{
     }
 }
 
-function mapStateToProps(state){
-    console.log('state.authReducer', state.authReducer)
+function mapStateToProps(store){
     return {
-        userInfo: state.authReducer.userInfo ? state.authReducer.userInfo : {},
-        loginError: state.authReducer.errorMessage,
-        loggingIn: state.authReducer.loggingIn
+        userInfo: store.authReducer.userInfo ? store.authReducer.userInfo : {},
+        loginError: store.authReducer.errorMessage,
+        loggingIn: store.authReducer.loggingIn,
+        isLoggedIn: store.authReducer.isLoggedIn
     }
 }
 
@@ -85,7 +89,6 @@ function mapDispatchToProps(dispatch){
 
     return bindActionCreators({
         login,
-        logout
     }, dispatch)
 }
 

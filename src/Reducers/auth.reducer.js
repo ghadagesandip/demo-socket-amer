@@ -5,8 +5,9 @@ import {
     LOGOUT
 } from './../Actions/auth.actions';
 
-let userInfo = JSON.parse(localStorage.getItem('user'));
-const initialState = userInfo ? { loggingIn: false, userInfo } : {};
+const userInfo = JSON.parse(localStorage.getItem('user'));
+const isLoggedIn = userInfo ? true :false;
+const initialState = userInfo ? {  userInfo, isLoggedIn } : { isLoggedIn};
 
 export default function authReducer(state = initialState, {type, payload}){
 

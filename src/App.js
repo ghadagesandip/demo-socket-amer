@@ -1,20 +1,29 @@
 import socketIOClient from "socket.io-client";
 import React, { Component } from 'react';
+import { withRouter } from "react-router";
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, compose } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
 import { SERVER_ADDRESS } from './constants'
-import AppHeader from './Components/AppHeader';
 import { Routes } from './Routes';
+import allReducers from './Reducers/index';
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(allReducers, composeEnhancers( applyMiddleware(logger, thunk)));
 
 class App extends Component {
   
-  
   render() {
     return (
-      <React.Fragment>
-            <AppHeader />
-            <div className="container-fluid content">
-              <Routes />
-            </div>
-      </React.Fragment>
+      <Provider store={store}>
+        <BrowserRouter >
+          <Routes />
+        </BrowserRouter>
+      </Provider>
     );
   }
   // constructor() {
