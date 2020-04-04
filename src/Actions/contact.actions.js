@@ -2,7 +2,9 @@ import * as contactService from './../Services/contact';
 
 export const CONTACT_REQ = "CONTACT_REQ";
 export const CONTACT_FAILURE = "CONTACT_FAILURE";
-export const CONTACT_SUCCESS = "CONTACT_SUCCESS";
+export const CONTACT_SUCCESS = 'CONTACT_SUCCESS';
+
+export const OPEN_CHAT_WINDOW_SUCCESS = "OPEN_CHAT_WINDOW_SUCCESS";
 
 export function getContacts(userId) {
     

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Contact from './../Components/Contact';
 import PageTemplate from './../templates/page';
+import ChatWindow from './../modules/ChatWindow';
  
 class Home extends Component {
     render() { 
@@ -10,7 +11,12 @@ class Home extends Component {
           <PageTemplate>
               <div className="row">
                 <div className="col-sm-10">
-                    Homes   
+                    Homes
+                    <div className="row">
+                      <div className="col-md-12">
+                        <ChatWindow />
+                      </div>
+                    </div>   
                 </div>
                 <div className="col-sm-2">
                   <Contact/>
@@ -36,4 +42,4 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
  
-export default connect()(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

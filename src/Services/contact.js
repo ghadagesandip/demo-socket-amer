@@ -15,5 +15,8 @@ export const getContacts = (userId) => {
     // } else{
     //     return Promise.reject(new Error('Error occurred.'))
     // }
-    return apiFactory().get(`/contact/getContacts/${userId}`);
+    // return apiFactory().get(`/contact/getContacts/${userId}`);
+
+    return apiFactory().get(`/conversation`);
+
 }

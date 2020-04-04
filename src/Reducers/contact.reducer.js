@@ -8,18 +8,19 @@ const initialState = localStorage.getItem('contacts') ? {contacts: JSON.parse(lo
 console.log('initialState', initialState)
 export default function contactReducer(state = initialState, {type, payload}){
 
+    console.log('payload' , payload)
 	switch(type){
 	
-	case CONTACT_REQ:
-        return {...state, ...payload}
+        case CONTACT_REQ:
+            return {...state, ...payload}
 
-    case CONTACT_SUCCESS:
-        return {...state, ...payload}
+        case CONTACT_SUCCESS:
+            return {...state, ...payload}
 
-    case CONTACT_FAILURE:
-        return {...state, ...payload}
-        
-    default:
-        return state
+        case CONTACT_FAILURE:
+            return {...state, ...payload}
+            
+        default:
+            return state
 	}
 }
